@@ -14,4 +14,4 @@ if __name__ == "__main__":
 			g /= 2
 			b /= 2
 			img2.putpixel((x,y),(int(r),int(g),int(b)))
-	img2.save("Q2.jpg")
+	img2.save("Q2.png")

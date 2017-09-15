@@ -1,6 +1,4 @@
-
 import sys
-
 if __name__ == "__main__":
 	txt = sys.argv[1]
 	f = open(txt,'r',encoding='UTF-8')
