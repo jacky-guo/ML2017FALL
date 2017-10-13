@@ -5,8 +5,7 @@ import random
 import math
 import sys
 
-
-if __name__ == "__main__":
+def training():
 	data = []
 	for i in range(18):
 	    data.append([])
@@ -44,8 +43,9 @@ if __name__ == "__main__":
 
 
 	w = np.zeros(len(x[0]))
+
 	l_rate = 10
-	repeat = 11000
+	repeat = 10000
 	x_t = x.transpose()
 	s_gra = np.zeros(len(x[0]))
 
@@ -61,11 +61,14 @@ if __name__ == "__main__":
 	    w = w - l_rate * gra/ada
 	    print ('iteration: %d | Cost: %f  ' % ( i,cost_a))
 
-	# # save model
-	# np.save('model.npy',w)
-	# # read model
-	# w = np.load('model.npy')
+	np.save('./model.npy',w)
+	return w
 
+
+
+if __name__ == "__main__":
+
+	w = np.load('model.npy')
 	test_x = []
 	n_row = 0
 	text = open(sys.argv[1] ,"r")
