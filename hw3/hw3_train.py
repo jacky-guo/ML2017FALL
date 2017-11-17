@@ -45,9 +45,9 @@ def build_model():
 
 	model = Sequential()
 	# Conv layer 1 output shape (32, 48, 48)
-	model.add(Conv2D(batch_input_shape=(None, 48,48,1),filters=32,kernel_size=3,padding='same',data_format='channels_last',activation='relu'))
+	model.add(Conv2D(batch_input_shape=(None, 48,48,1),filters=32,kernel_size=5,padding='same',data_format='channels_last',activation='relu'))
 	# Conv layer 2 output shape (32, 48, 48)
-	model.add(Conv2D(32,3,strides=1,padding='same',data_format='channels_last',activation='relu'))
+	model.add(Conv2D(32,5,strides=1,padding='same',data_format='channels_last',activation='relu'))
 	model.add(BatchNormalization())
 	# Pooling layer 1 (max pooling) output shape (32, 24, 24)
 	model.add(MaxPooling2D((2,2)))
@@ -73,6 +73,7 @@ def build_model():
 
 	# Conv layer 7 output shape (256, 6, 6)
 	model.add(Conv2D(256, 3, strides=1, padding='same', data_format='channels_last',activation='relu'))
+	model.add(BatchNormalization())
 	# Conv layer 8 output shape (256, 6, 6)
 	model.add(Conv2D(256, 3, strides=1, padding='same', data_format='channels_last',activation='relu'))
 	model.add(BatchNormalization())
@@ -99,7 +100,7 @@ def main(training_data_path):
 	# parameter
 	save_every = 20
 	batch_size = 128
-	num_epoch = 60 
+	num_epoch = 1 
 
 	X_train,y_train = load_data(training_data_path)
 	print('Load Data Successful!')
@@ -109,7 +110,7 @@ def main(training_data_path):
 
 	# Data Augmentation
 	datagen = ImageDataGenerator(
-		rotation_range=20,
+		rotation_range=15,
 		width_shift_range=0.2,
 		height_shift_range=0.2,
 		horizontal_flip=True)
