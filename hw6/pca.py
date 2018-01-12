@@ -2,7 +2,6 @@ from skimage import io
 import numpy as np
 import os
 import sys
-
 if __name__ == "__main__":
 	img_list = []
 	for dirPath, dirNames, fileNames in os.walk(sys.argv[1]):
@@ -14,9 +13,11 @@ if __name__ == "__main__":
 				img_list = img_fla
 			else:
 				img_list = np.concatenate((img_list, img_fla), axis=0)
+	img_size0 = img_list.shape[0]
+	img_size1 = img_list.shape[1]
 	img_list = img_list.T
 	new_mean = np.mean(img_list, axis=1)
-	img_mean_np = np.repeat(np.array([new_mean]).T,415,axis=1)
+	img_mean_np = np.repeat(np.array([new_mean]).T,img_size0,axis=1)
 	X = img_list - img_mean_np
 	U, s, V = np.linalg.svd(X, full_matrices=False)
 	
@@ -27,7 +28,7 @@ if __name__ == "__main__":
 	for column in range(4):
 		weight.append(np.dot(test_img_fla, U.T[column]))
 
-	eigenfaces = np.zeros(1080000,)
+	eigenfaces = np.zeros(img_size1,)
 	eigenface_li = []
 
 	for column, w in enumerate(np.array(weight)):
@@ -38,7 +39,6 @@ if __name__ == "__main__":
 	eigenfaces -= np.min(eigenfaces)
 	eigenfaces /= np.max(eigenfaces)
 	eigenfaces = (eigenfaces*255).astype(np.uint8)
-	print(eigenfaces.shape)
 	eigenfaces = eigenfaces.reshape(600, 600, 3)
 	
 	io.imsave('reconstruction.jpg', eigenfaces)
