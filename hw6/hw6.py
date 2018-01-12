@@ -3,7 +3,7 @@ import pandas as pd
 np.random.seed(1337)
 from sklearn.cluster import KMeans
 from keras.layers import Dense,Input
-from keras import Model
+from keras.models import Model
 from keras.callbacks import EarlyStopping
 import sys
 
