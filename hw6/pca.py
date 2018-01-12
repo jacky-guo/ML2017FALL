@@ -21,7 +21,9 @@ if __name__ == "__main__":
 	X = img_list - img_mean_np
 	U, s, V = np.linalg.svd(X, full_matrices=False)
 	
-	test_img = np.array(io.imread(sys.argv[2]))
+	test_path = os.path.join(sys.argv[1],sys.argv[2])
+
+	test_img = np.array(io.imread(test_path))
 	test_img_fla = test_img.flatten()
 	
 	weight = []
