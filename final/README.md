@@ -17,6 +17,8 @@
 ## Execute
 ```
 cd src
-bash test.sh testing_data.csv result.csv
+// testing_data.csv is testing_data_filepath 
+// result.csv is output_filepath
+bash test.sh testing_data.csv result.csv  
 ```
 
